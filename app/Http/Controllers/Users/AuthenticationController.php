@@ -22,11 +22,12 @@ class AuthenticationController extends Controller
 
     public function login(Request $request)
     {
+        // dd($request);
         $credentials = $request->only('email', 'password');
 
+        //Ths is responsible for attempting to log in a user by calling the login method on the userRepository with the provided credentials. If the login is successful, the subsequent code block will be executed.
         if ($this->userRepository->login($credentials)) {
             // dd('$credentials');
-            // return redirect()->intended('user/dashboard');
             return redirect()->intended('user/dashboard');
         }
 
@@ -38,6 +39,7 @@ class AuthenticationController extends Controller
 
     public function logout()
     {
+        //This line is calling the logout method on an instance of the UserAuthRepository class.
         $this->userRepository->logout();
         return redirect()->route('login');
     }

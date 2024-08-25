@@ -10,6 +10,7 @@ class UserAuthRepository implements UserAuthRepositoryInterface
 {
     public function register(array $data)
     {
+        // dd($data);
         //create a new user
         return User::create([
             'name' => $data['name'],

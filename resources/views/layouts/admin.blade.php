@@ -156,18 +156,23 @@
                         data-bs-toggle="dropdown">
                         <img src="{{ asset('backend/assets/img/profile-img.jpg') }}" alt="Profile"
                             class="rounded-circle" />
-                        <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+                        <span class="d-none d-md-block dropdown-toggle ps-4">
+                            @if (Auth::guard('admin')->check())
+                            {{ Auth::guard('admin')->user()->name }}
+                        @endif</span>
                     </a><!-- End Profile Iamge Icon -->
 
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                         <li class="dropdown-header">
-                            <h6>Hammad Khan</h6>
-                            <span>Web Designer</span>
+                            <h6>@if (Auth::guard('admin')->check())
+                                <h6>{{ Auth::guard('admin')->user()->name }}</h6>
+                            @endif</h6>
+                            <span>Web Developer</span>
                         </li>
                         <li>
                             <hr class="dropdown-divider" />
                         </li>
-
+                    
                         <li>
                             <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
                                 <i class="bi bi-person"></i>
@@ -177,7 +182,7 @@
                         <li>
                             <hr class="dropdown-divider" />
                         </li>
-
+                    
                         <li>
                             <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
                                 <i class="bi bi-gear"></i>
@@ -187,7 +192,7 @@
                         <li>
                             <hr class="dropdown-divider" />
                         </li>
-
+                    
                         <li>
                             <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
                                 <i class="bi bi-question-circle"></i>
@@ -197,14 +202,20 @@
                         <li>
                             <hr class="dropdown-divider" />
                         </li>
-
+                    
                         <li>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
+                            <a class="dropdown-item d-flex align-items-center" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 <i class="bi bi-box-arrow-right"></i>
                                 <span>Sign Out</span>
                             </a>
                         </li>
                     </ul>
+                    
+                    <!-- Logout Form -->
+                    <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                    
                     <!-- End Profile Dropdown Items -->
                 </li>
                 <!-- End Profile Nav -->
