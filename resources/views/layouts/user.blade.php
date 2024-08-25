@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>AnonStore - Home</title>
     <link rel="stylesheet" href="{{asset('frontend/assets/dist/main.css')}}">
-</head>
+ 
 
 <body>
     <!-- Header Area Start -->
@@ -82,10 +82,10 @@
                 <div class="d-none d-lg-block">
                     <nav class="menu-area d-flex align-items-center">
                         <div class="logo">
-                            <a href="index.html"><img src="{{asset('frontend/assets/dist/images/logo/logo.png')}}" alt="logo" /></a>
+                            <a href="{{route('home')}}"><img src="{{asset('frontend/assets/dist/images/logo/logo.png')}}" alt="logo" /></a>
                         </div>
                         <ul class="main-menu d-flex align-items-center">
-                            <li><a class="active" href="index.html">Home</a></li>
+                            <li><a class="active" href="{{route('home')}}">Home</a></li>
                             <li><a href="shop.html">Men</a></li>
                             <li><a href="shop.html">Women</a></li>
                             <li><a href="shop.html">Shop</a></li>
@@ -164,7 +164,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="account.html"><svg xmlns="http://www.w3.org/2000/svg" width="18"
+                                    <a href="{{route('loginForm')}}"><svg xmlns="http://www.w3.org/2000/svg" width="18"
                                             height="20" viewBox="0 0 18 20">
                                             <g id="Account" transform="translate(1 1)">
                                                 <path id="Path_86" data-name="Path 86"
@@ -179,6 +179,10 @@
                                 </li>
                             </ul>
                         </div>
+
+                       
+                        
+
                     </nav>
                 </div>
                 <!-- Mobile Menu -->
