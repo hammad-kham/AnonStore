@@ -40,6 +40,7 @@ class AdminAuthController extends Controller
 
     public function logout(Request $request)
     {
+        
         //when you need to directly control which guard is being logged out.use this method
         Auth::guard('admin')->logout();
 

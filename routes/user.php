@@ -2,11 +2,11 @@
 use Illuminate\Support\Facades\Route;
 
 //users controller
-use App\Http\Middleware\UserAuthMiddleware;
 use App\Http\Controllers\Users\AuthenticationController;
 use App\Http\Controllers\Users\RegisterController;
 use App\Http\Controllers\Users\UserDashboardController;
-
+//middleware
+use App\Http\Middleware\UserAuthMiddleware;
 
 
 // Routes for authenticated users

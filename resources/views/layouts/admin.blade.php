@@ -204,17 +204,17 @@
                         </li>
                     
                         <li>
-                            <a class="dropdown-item d-flex align-items-center" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <a class="dropdown-item d-flex align-items-center" href="{{route('admin.logout')}}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 <i class="bi bi-box-arrow-right"></i>
                                 <span>Sign Out</span>
                             </a>
                         </li>
-                    </ul>
-                    
-                    <!-- Logout Form -->
-                    <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
+                        
+                        <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
+                            @method('POST')
+                            @csrf
+                        </form>
+                        
                     
                     <!-- End Profile Dropdown Items -->
                 </li>

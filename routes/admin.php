@@ -7,10 +7,6 @@ use App\Http\Controllers\Admin\AdminAuthController;
 
 use App\Http\Controllers\Admin\AdminDashboardController;
 
-use App\Http\Controllers\Admin\AdminRegisteredController;
-
-
-
     //admin routes
     Route::prefix('admin')->name('admin.')->group(function () {
         
@@ -24,6 +20,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('register', function () {
         abort(404);
     });
+    //routes are disable because i want admin to add through tinker..
     // Route::post('register', [AdminRegisteredController::class, 'register'])->name('SubmitForm');
     // Route::get('register', [AdminRegisteredController::class, 'showRegistrationForm'])->name('register');
    
