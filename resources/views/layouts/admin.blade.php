@@ -36,7 +36,7 @@
     <!-- ======= Header ======= -->
     <header id="header" class="header fixed-top d-flex align-items-center">
         <div class="d-flex align-items-center justify-content-between">
-            <a href="{{route('home')}}" class="logo d-flex align-items-center">
+            <a href="{{route('admin.dashboard')}}" class="logo d-flex align-items-center">
                 <img src="{{ asset('backend/assets/img/logo.png') }}" alt="" />
                 <span class="d-none d-lg-block">AnonStore</span>
             </a>
@@ -229,7 +229,7 @@
     <aside id="sidebar" class="sidebar">
         <ul class="sidebar-nav" id="sidebar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="{{route('home')}}">
+                <a class="nav-link" href="{{route('admin.dashboard')}}">
                     <i class="bi bi-grid"></i>
                     <span>Dashboard</span>
                 </a>
@@ -244,7 +244,7 @@
                 </a>
                 <ul id="components-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
                     <li>
-                        <a href="components-alerts.html">
+                        <a href="{{route('products.index')}}">
                             <i class="bi bi-circle"></i><span>Products</span>
                         </a>
                     </li>

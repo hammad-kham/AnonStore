@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\AdminAuthController;
 
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ProductController;
 
     //admin routes
     Route::prefix('admin')->name('admin.')->group(function () {
@@ -26,14 +27,15 @@ Route::prefix('admin')->name('admin.')->group(function () {
     // Route::get('register', [AdminRegisteredController::class, 'showRegistrationForm'])->name('register');
    
 });
+
 //routes with middlewares
-Route::get('admin/dashboard',[AdminDashboardController::class, 'index'])->Middleware(AdminAuthMiddleware::class);
+Route::get('admin/dashboard',[AdminDashboardController::class, 'index'])->name('admin.dashboard')->Middleware(AdminAuthMiddleware::class);
 //category routes
 Route::resource('categories', CategoryController::class);
-
 Route::get('category/trashed', [CategoryController::class, 'trashed'])->name('categories.trashed');
 // Route for restoring trashed categories
 Route::put('category/{id}/restore', [CategoryController::class, 'restore'])->name('categories.restore');
-
 Route::delete('category/{id}/force-delete', [CategoryController::class, 'destroyPermanently'])->name('categories.force-delete');
 
+//products routes
+Route::resource('products', ProductController::class);

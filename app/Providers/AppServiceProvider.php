@@ -2,14 +2,16 @@
 
 namespace App\Providers;
 //interfaces
-use App\Repositories\Contracts\AdminAuthRepositoryInterface;
-use App\Repositories\Contracts\CategoryRepositoryInterface;
-use App\Repositories\Contracts\UserAuthRepositoryInterface;
-//Eloquents
-use App\Repositories\Eloquent\AdminAuthRepository;
+use Illuminate\Support\ServiceProvider;
+use App\Repositories\Eloquent\ProductRepository;
 use App\Repositories\Eloquent\CategoryRepository;
 use App\Repositories\Eloquent\UserAuthRepository;
-use Illuminate\Support\ServiceProvider;
+//Eloquents
+use App\Repositories\Eloquent\AdminAuthRepository;
+use App\Repositories\Contracts\ProductRepositoryInterface;
+use App\Repositories\Contracts\CategoryRepositoryInterface;
+use App\Repositories\Contracts\UserAuthRepositoryInterface;
+use App\Repositories\Contracts\AdminAuthRepositoryInterface;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,6 +26,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(AdminAuthRepositoryInterface::class, AdminAuthRepository::class);
         //bind category interfave and implemenet class
         $this->app->bind(CategoryRepositoryInterface::class, CategoryRepository::class);
+        //product interface binding
+        $this->app->bind(ProductRepositoryInterface::class, ProductRepository::class);
     }
 
     /**
