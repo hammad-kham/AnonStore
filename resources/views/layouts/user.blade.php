@@ -7,6 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>AnonStore - Home</title>
     <link rel="stylesheet" href="{{asset('frontend/assets/dist/main.css')}}">
+    {{-- <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+
  
 
 <body>
@@ -141,7 +145,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="cart.html"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
+                                    <a href="{{route('user.cart.index')}}"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
                                             viewBox="0 0 22 22">
                                             <g id="Icon" transform="translate(-1524 -89)">
                                                 <ellipse id="Ellipse_2" data-name="Ellipse 2" cx="0.909" cy="0.952"
@@ -267,7 +271,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="cart.html">
+                                    <a href="{{route('user.cart.index')}}">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
                                             viewBox="0 0 22 22">
                                             <g id="Icon" transform="translate(-1524 -89)">

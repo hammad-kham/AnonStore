@@ -78,21 +78,7 @@
                                     @forelse ($products as $index => $product)
                                         <tr>
                                             <td>{{ $index + 1 }}</td>
-                                            {{-- <td>
-                                                @if ($product->images->isNotEmpty())
-                                                    @foreach ($product->images as $image)
-                                                        <img src="{{ asset('storage/backend/images/' . $image->url) }}"
-                                                            alt="{{ $product->name }}" class="img-thumbnail"
-                                                            style="width: 150px; height: auto;">
-                                                    @endforeach
-                                                @else
-                                                    <img src="{{ asset('storage/backend/images/default-image.png') }}"
-                                                        alt="No Image" class="img-thumbnail"
-                                                        style="width: 150px; height: auto;">
-                                                @endif
-
-
-                                            </td> --}}
+                                            
                                             <td>
                                                 @if ($product->images->isNotEmpty())
                                                     @foreach ($product->images as $image)

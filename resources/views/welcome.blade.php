@@ -14,7 +14,7 @@
                         <h2>Premium care for
                             premium people.</h2>
                         <p>Not ready for a subscription? Shop all a la carté skin, hair, and body care.</p>
-                        <a class="btn bg-primary" href="#">Shop Now</a>
+                        <a class="btn bg-primary" href="{{route('user.shop')}}">Shop Now</a>
                     </div>
                 </div>
                 <div class="col-lg-6 order-1 order-lg-2">

@@ -1,4 +1,5 @@
 @extends('layouts.user')
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
 @section('content')
 <main>
@@ -81,7 +82,10 @@
                                 <p class="product-card-price">${{ number_format($product->price, 2) }}</p>
                                 <div class="product-card-actions">
                                     <a href="#" class="btn btn-outline-secondary"><i class="far fa-heart"></i></a>
-                                    <a href="#" class="btn btn-primary"><i class="fas fa-cart-plus"></i> Add to Cart</a>
+                                    <a href="#" class="btn btn-primary add-to-cart" data-product-id="{{ $product->id }}">
+                                        <i class="fas fa-cart-plus"></i> Add to Cart
+                                    </a>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -97,6 +101,42 @@
     <!-- Shop Page End -->
 </main>
 @endsection
+<script>
+   document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.add-to-cart').forEach(button => {
+        button.addEventListener('click', function (event) {
+            event.preventDefault();
+
+            const productId = this.getAttribute('data-product-id');
+            const userId = {{ Auth::id() }}; 
+
+            fetch('{{ route('user.cart.add') }}', { 
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                },
+                body: JSON.stringify({
+                    user_id: userId,
+                    product_id: productId,
+                    // Default quantity
+                    quantity: 1 
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Product added to cart successfully!');
+                } else {
+                    alert('Failed to add product to cart.');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    });
+});
+
+    </script>
 
 @section('styles')
 <style>
