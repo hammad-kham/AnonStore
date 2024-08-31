@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\AdminAuthController;
 
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ManageUsersController;
 use App\Http\Controllers\Admin\ProductController;
 
     //admin routes
@@ -39,3 +40,5 @@ Route::delete('category/{id}/force-delete', [CategoryController::class, 'destroy
 
 //products routes
 Route::resource('products', ProductController::class);
+//manageusers routes
+Route::get('dashboard/users', [ManageUsersController::class, 'index'])->name('manage.users.index');

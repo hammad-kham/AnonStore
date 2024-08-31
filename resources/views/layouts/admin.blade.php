@@ -291,7 +291,7 @@
                 </a>
                 <ul id="tables-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
                     <li>
-                        <a href="tables-general.html">
+                        <a href="{{route('manage.users.index')}}">
                             <i class="bi bi-circle"></i><span>Users</span>
                         </a>
                     </li>

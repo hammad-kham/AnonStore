@@ -8,10 +8,12 @@ use App\Repositories\Eloquent\CategoryRepository;
 use App\Repositories\Eloquent\UserAuthRepository;
 //Eloquents
 use App\Repositories\Eloquent\AdminAuthRepository;
+use App\Repositories\Eloquent\ManageUsersRepository;
 use App\Repositories\Contracts\ProductRepositoryInterface;
 use App\Repositories\Contracts\CategoryRepositoryInterface;
 use App\Repositories\Contracts\UserAuthRepositoryInterface;
 use App\Repositories\Contracts\AdminAuthRepositoryInterface;
+use App\Repositories\Contracts\ManageUsersRepositoryInterface;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -28,6 +30,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(CategoryRepositoryInterface::class, CategoryRepository::class);
         //product interface binding
         $this->app->bind(ProductRepositoryInterface::class, ProductRepository::class);
+        $this->app->bind(ManageUsersRepositoryInterface::class, ManageUsersRepository::class);
     }
 
     /**

@@ -82,13 +82,13 @@
                 <div class="d-none d-lg-block">
                     <nav class="menu-area d-flex align-items-center">
                         <div class="logo">
-                            <a href="{{route('home')}}"><img src="{{asset('frontend/assets/dist/images/logo/logo.png')}}" alt="logo" /></a>
+                            <a href="#"><img src="{{asset('frontend/assets/dist/images/logo/logo.png')}}" alt="logo" /></a>
                         </div>
                         <ul class="main-menu d-flex align-items-center">
                             <li><a class="active" href="{{route('home')}}">Home</a></li>
                             <li><a href="shop.html">Men</a></li>
                             <li><a href="shop.html">Women</a></li>
-                            <li><a href="shop.html">Shop</a></li>
+                            <li><a href="{{route('user.shop')}}">Shop</a></li>
                             <li>
                                 <a href="javascript:void(0)">Category
                                     <svg xmlns="http://www.w3.org/2000/svg" width="9.98" height="5.69"
@@ -100,12 +100,10 @@
                                         </g>
                                     </svg>
                                 </a>
-                                <ul class="sub-menu">
-                                    <li><a href="javascript:void(0)">Category 1</a></li>
-                                    <li><a href="javascript:void(0)">Category 2</a></li>
-                                    <li><a href="javascript:void(0)">Category 3</a></li>
-                                    <li><a href="javascript:void(0)">Category 4</a></li>
-                                    <li><a href="javascript:void(0)">Category 5</a></li>
+                                <ul>
+                                    {{-- @foreach($categories as $category)
+                                        <li>{{ $category->name }}</li>
+                                    @endforeach --}}
                                 </ul>
                             </li>
                             <li><a href="javascript:void(0)">Sales</a></li>
@@ -224,11 +222,11 @@
                                 </svg>
                             </a>
                             <ul class="sub-menu">
-                                <li><a href="javascript:void(0)">Category 1</a></li>
-                                <li><a href="javascript:void(0)">Category 2</a></li>
-                                <li><a href="javascript:void(0)">Category 3</a></li>
-                                <li><a href="javascript:void(0)">Category 4</a></li>
-                                <li><a href="javascript:void(0)">Category 5</a></li>
+                                {{-- @foreach($categories as $category)
+                                <li>
+                                    <a href="{{ route('user.category.index', $category->id) }}">{{ $category->name }}</a>
+                                </li>
+                            @endforeach --}}
                             </ul>
                         </li>
                         <li><a href="javascript:void(0)">Sales</a></li>
