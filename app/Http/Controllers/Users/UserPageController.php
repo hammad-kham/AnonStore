@@ -26,9 +26,5 @@ class UserPageController extends Controller
         return view('layouts.user', compact('categories'));
     }
 
-    public function shop(){
-        // $shop = $this->productRepository->all();
-        return view('user.shop');
-    }
-    
+   
 }

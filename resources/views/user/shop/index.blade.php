@@ -35,12 +35,12 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form method="GET" action="{{ route('shop.index') }}">
+                            <form method="GET" action="#">
                                 <div class="form-group">
                                     <label for="category">Category:</label>
                                     <select id="category" name="category" class="form-control">
                                         <option value="">All Categories</option>
-                                        @foreach($categories as $category)
+                                        @foreach($shopCategories as $category)
                                             <option value="{{ $category->id }}">{{ $category->name }}</option>
                                         @endforeach
                                     </select>
@@ -59,17 +59,24 @@
 
             <!-- Products Grid -->
             <div class="row mt-4">
-                @forelse($products as $product)
+                @forelse($shopProducts as $product)
                     <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
                         <div class="product-card">
                             <div class="product-card-image">
-                                <a href="{{ route('product.show', $product->id) }}">
-                                    <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="img-fluid">
+                                <a href="{{ route('user.product.show', $product->id) }}">
+                                    @if ($product->images->isNotEmpty())
+                                        @foreach ($product->images as $image)
+                                            <img src="{{ asset('storage/' . $image->path) }}" alt="{{ $product->name }}" class="img-fluid">
+                                            @break  <!-- Display only the first image -->
+                                        @endforeach
+                                    @else
+                                        <img src="{{ asset('storage/images/default-image.png') }}" alt="No Image" class="img-fluid">
+                                    @endif
                                 </a>
                             </div>
                             <div class="product-card-body">
                                 <h4 class="product-card-title">
-                                    <a href="{{ route('product.show', $product->id) }}">{{ $product->name }}</a>
+                                    <a href="{{ route('user.product.show', $product->id) }}">{{ $product->name }}</a>
                                 </h4>
                                 <p class="product-card-price">${{ number_format($product->price, 2) }}</p>
                                 <div class="product-card-actions">

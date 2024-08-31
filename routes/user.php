@@ -7,6 +7,7 @@ use App\Http\Controllers\Users\RegisterController;
 //middleware
 use App\Http\Controllers\Users\UserDashboardController;
 use App\Http\Controllers\Users\AuthenticationController;
+use App\Http\Controllers\Users\FrontendShopController;
 use App\Http\Controllers\Users\UserPageController;
 
 // Routes for authenticated users
@@ -25,4 +26,5 @@ Route::post('logout', [AuthenticationController::class, 'logout'])->name('logout
 route::get('/', [UserPageController::class,'index'])->name('user.index');
 Route::get('/category/{id}', [UserPageController::class, 'show'])->name('category.show');
 
-route::get('/shop', [UserPageController::class,'shop'])->name('user.shop');
+route::get('/shop', [FrontendShopController::class,'shop'])->name('user.shop');
+route::get('shop/{id}', [FrontendShopController::class,'showProduct'])->name('user.product.show');

@@ -4,6 +4,7 @@ namespace App\Repositories\Eloquent;
 
 use App\Models\Image;
 use App\Models\Product;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Collection;
 use App\Repositories\Contracts\ProductRepositoryInterface;
 
@@ -28,15 +29,17 @@ class ProductRepository implements ProductRepositoryInterface
     {
         $product = Product::create($data);
     
-        //handle image
-        if (isset($data['image'])) {
-            $imageFile = $data['image'];
-            $path = $imageFile->store('images', 'public');
-
-            if ($path) {
-                $product->images()->create([
-                    'path' => $path,
-                ]);
+         // Handle image uploads
+         if (isset($data['images'])) {
+            foreach ($data['images'] as $imageFile) {
+                $path = $imageFile->store('images', 'public');
+                
+                if ($path) {
+                    $product->images()->create([
+                        // Adjusted from 'path' to 'url' to match your Image model
+                        'path' => $path, 
+                    ]);
+                }
             }
         }
 
@@ -53,8 +56,10 @@ class ProductRepository implements ProductRepositoryInterface
             if (isset($data['images'])) {
                 // Delete old images
                 $product->images()->delete(); 
-                foreach ($data['images'] as $image) {
-                    $product->images()->create(['path' => $image->store('public/backend/images')]);
+                
+                foreach ($data['images'] as $imageFile) {
+                    $path = $imageFile->store('images', 'public');
+                    $product->images()->create(['path' => $path]);
                 }
             }
 
@@ -70,8 +75,13 @@ class ProductRepository implements ProductRepositoryInterface
         $product = Product::find($id);
 
         if ($product) {
-            // Delete associated images with prodt
-            $product->images()->delete(); 
+            // Delete associated images
+            $product->images()->each(function ($image) {
+                // Delete image files from storage
+                Storage::disk('public')->delete($image->url);
+                $image->delete();
+            });
+
             return $product->delete();
         }
 

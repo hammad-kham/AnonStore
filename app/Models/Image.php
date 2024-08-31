@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Image extends Model
 {
     use HasFactory;
-    protected $fillable = ['url','imageable_id', 'imageable_type'];
+    protected $fillable = ['path','imageable_id', 'imageable_type'];
 
     public function imageable()
     {
@@ -17,6 +17,6 @@ class Image extends Model
 
     public function getUrlAttribute()
     {
-        return 'backend/images/' . $this->attributes['url'];
+        return 'backend/images/' . $this->attributes['path'];
     }
 }

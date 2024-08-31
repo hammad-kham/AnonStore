@@ -78,7 +78,7 @@
                                     @forelse ($products as $index => $product)
                                         <tr>
                                             <td>{{ $index + 1 }}</td>
-                                            <td>
+                                            {{-- <td>
                                                 @if ($product->images->isNotEmpty())
                                                     @foreach ($product->images as $image)
                                                         <img src="{{ asset('storage/backend/images/' . $image->url) }}"
@@ -92,7 +92,22 @@
                                                 @endif
 
 
+                                            </td> --}}
+                                            <td>
+                                                @if ($product->images->isNotEmpty())
+                                                    @foreach ($product->images as $image)
+                                                        <img src="{{ asset('storage/' . $image->path) }}"
+                                                             alt="{{ $product->name }}" class="img-thumbnail"
+                                                             style="width: 150px; height: auto;">
+                                                    @endforeach
+                                                @else
+                                                    <img src="{{ asset('storage/images/default-image.png') }}"
+                                                         alt="No Image" class="img-thumbnail"
+                                                         style="width: 150px; height: auto;">
+                                                @endif
                                             </td>
+                                            
+
                                             <td>{{ $product->name }}</td>
                                             <td>{{ $product->slug }}</td>
                                             <td>{{ $product->description }}</td>

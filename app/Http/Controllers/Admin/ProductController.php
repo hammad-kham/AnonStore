@@ -60,6 +60,16 @@ class ProductController extends Controller
             // Validation for images
               'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', 
         ]);
+        // Handle image upload
+        $images = $request->file('images');
+        if ($images) {
+            $imagePaths = [];
+            foreach ($images as $image) {
+                $imagePath = $image->store('images', 'public');
+                $imagePaths[] = $imagePath;
+            }
+        }
+        //  $product = $this->productRepository->create($validated);
         $this->productRepository->create($validated);
         
         return redirect()->route('products.index')->with('success', 'Product created successfully.');
@@ -97,6 +107,17 @@ class ProductController extends Controller
             // Validation for images
             'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048', 
         ]);
+         // Handle image upload
+         $images = $request->file('images');
+         if ($images) {
+             $imagePaths = [];
+             foreach ($images as $image) {
+                 $imagePath = $image->store('images', 'public');
+                 $imagePaths[] = $imagePath;
+             }
+             // Store image paths as JSON
+             $validated['images'] = json_encode($imagePaths); 
+         }
         
 
         $this->productRepository->update($id, $validated);
@@ -109,6 +130,13 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
+        // Delete associated images
+        // if ($product->images) {
+        //     $imagePaths = json_decode($product->images, true); // Assuming images are stored as JSON
+        //     foreach ($imagePaths as $path) {
+        //         Storage::disk('public')->delete($path);
+        //     }
+        // }
         $this->productRepository->delete($id);
         return redirect()->route('products.index')->with('success', 'Product deleted successfully.');
     }
