@@ -3,12 +3,12 @@
 @section('content')
 <div class="container">
     <div class="cart-container">
-        <h2>Your Cart</h2>
+        <h2 class="">Your Cart</h2>
         @if($carts->isEmpty())
-            <div class="empty-cart text-center">
+            <div class="empty-cart text-center mb-2">
                 <h3>Your cart is currently empty</h3>
                 <p>It looks like you haven't added any items to your cart yet. Start shopping now and fill your cart with your favorite products!</p>
-                <a href="{{ route('user.shop') }}" class="btn btn-primary">Browse Products</a>
+                <a href="{{ route('user.shop') }}" class="btn btn-primary mt-4">Browse Products</a>
             </div>
         @else
             <div class="cart-items">
@@ -24,14 +24,14 @@
                             </div>
                             <div class="cart-item-info">
                                 <h4>{{ $cart->product->product_name }}</h4>
-                                <p>${{ $cart->product->price }}</p>
+                                <p>{{ $cart->product->price }}</p>
                                 <div class="cart-item-quantity">
                                     <input type="number" value="{{ $cart->quantity }}" min="1" data-cart-id="{{ $cart->id }}" class="cart-quantity">
                                 </div>
                             </div>
                         </div>
                         <div class="cart-item-total">
-                            <p>Total: ${{ $cart->quantity * $cart->product->price }}</p>
+                            <p>Total: {{ $cart->quantity * $cart->product->price }}</p>
                             <button class="btn btn-remove" data-cart-id="{{ $cart->id }}" onclick="removeFromCart({{ $cart->id }})">Remove</button>
                         </div>
                     </div>
@@ -41,8 +41,8 @@
                 <h3>Order Summary</h3>
                 <div class="summary-item"><span>Subtotal</span><span>${{ $total }}</span></div>
                 <div class="summary-item"><span>Shipping</span><span>Calculated at checkout</span></div>
-                <div class="summary-item total"><span>Total</span><span>${{ $total }}</span></div>
-                <button class="btn btn-primary btn-block">Proceed to Checkout</button>
+                <div class="summary-item total"><span>Total</span><span>{{ $total }}</span></div>
+                <button class="btn btn-primary btn-block"><a href="{{ route('show.checkout.page') }}" class="btn btn-primary btn-block">Proceed to Checkout</a></button>
             </div>
         @endif
     </div>

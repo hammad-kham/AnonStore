@@ -8,16 +8,17 @@
             <div class="row">
                 <!-- Product Image Gallery -->
                 <div class="col-lg-6">
-                    {{-- <div class="product-image-gallery">
-                        <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="img-fluid main-image">
+                    <div class="product-image-gallery">
+                        <!-- Main Image -->
+                        <img src="{{ asset('backend/images/' . $product->image) }}" alt="{{ $product->name }}" class="img-fluid main-image">
                         @if($product->images->count() > 1)
                             <div class="product-thumbnails mt-2">
                                 @foreach($product->images as $image)
-                                    <img src="{{ asset('storage/' . $image->path) }}" alt="{{ $product->name }}" class="img-thumbnail">
+                                    <img src="{{ asset('backend/images/' . $image->path) }}" alt="{{ $product->name }}" class="img-thumbnail">
                                 @endforeach
                             </div>
                         @endif
-                    </div> --}}
+                    </div>
                 </div>
 
                 <!-- Product Details -->
@@ -47,48 +48,65 @@
 <style>
 .single-product-page {
     background-color: #f9f9f9;
+    padding: 30px 0;
 }
+
 .product-image-gallery {
     position: relative;
+    padding-right: 10px;
 }
+
 .main-image {
     width: 100%;
     height: auto;
     border: 1px solid #ddd;
+    border-radius: 5px;
 }
+
 .product-thumbnails {
     display: flex;
     gap: 10px;
 }
+
 .product-thumbnails img {
     width: 80px;
     height: auto;
     cursor: pointer;
+    border: 1px solid #ddd;
+    border-radius: 5px;
 }
+
 .product-thumbnails img:hover {
-    border: 2px solid #1a2224;
+    border-color: #1a2224;
 }
+
 .product-details {
     padding-left: 20px;
 }
+
 .product-title {
     font-size: 2rem;
     margin-bottom: 10px;
 }
+
 .product-price {
     font-size: 1.5rem;
     color: #e74c3c;
     margin-bottom: 10px;
 }
+
 .product-description {
     font-size: 1rem;
     margin-bottom: 20px;
 }
+
 .product-actions a {
     margin-right: 10px;
 }
+
 .product-meta p {
     margin: 0;
+    font-size: 0.9rem;
 }
 </style>
 @endsection

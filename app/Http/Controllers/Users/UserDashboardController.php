@@ -10,6 +10,6 @@ class UserDashboardController extends Controller
  
     public function dashboard()
     {
-        return view('user.dashboard');
+        return view('user.user-sitting.dashboard');
     }
 }

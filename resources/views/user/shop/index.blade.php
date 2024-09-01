@@ -79,13 +79,27 @@
                                 <h4 class="product-card-title">
                                     <a href="{{ route('user.product.show', $product->id) }}">{{ $product->name }}</a>
                                 </h4>
-                                <p class="product-card-price">${{ number_format($product->price, 2) }}</p>
-                                <div class="product-card-actions">
-                                    <a href="#" class="btn btn-outline-secondary"><i class="far fa-heart"></i></a>
-                                    <a href="#" class="btn btn-primary add-to-cart" data-product-id="{{ $product->id }}">
-                                        <i class="fas fa-cart-plus"></i> Add to Cart
-                                    </a>
+                                
+                               
+                                <div class="d-flex justify-content-between align-items-center price-stock-wrapper">
                                     
+                                    <p class="product-card-price mb-0">{{ number_format($product->price, 2) }}</p>
+                                    @if($product->stock > 0)
+                                        <p class="product-card-stock  mb-0 text-success">In Stock: {{ $product->stock }}</p>
+                                    @else
+                                        <p class="product-card-stock mb-0 text-danger">Out of Stock</p>
+                                    @endif
+                                </div>
+
+                                <div class="product-card-actions mt-3">
+                                    <a href="#" class="btn btn-outline-secondary btn-outline-info "><i class="far fa-heart"></i></a>
+                                    @if($product->stock > 0)
+                                        <a href="#" class="btn btn-primary add-to-cart" data-product-id="{{ $product->id }}">
+                                            <i class="fas fa-cart-plus"></i> Add to Cart
+                                        </a>
+                                    @else
+                                        <button class="btn btn-secondary" disabled>Out of Stock</button>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -101,57 +115,25 @@
     <!-- Shop Page End -->
 </main>
 @endsection
-<script>
-   document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll('.add-to-cart').forEach(button => {
-        button.addEventListener('click', function (event) {
-            event.preventDefault();
-
-            const productId = this.getAttribute('data-product-id');
-            const userId = {{ Auth::id() }}; 
-
-            fetch('{{ route('user.cart.add') }}', { 
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-                },
-                body: JSON.stringify({
-                    user_id: userId,
-                    product_id: productId,
-                    // Default quantity
-                    quantity: 1 
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert('Product added to cart successfully!');
-                } else {
-                    alert('Failed to add product to cart.');
-                }
-            })
-            .catch(error => console.error('Error:', error));
-        });
-    });
-});
-
-    </script>
 
 @section('styles')
 <style>
 .shop-page {
     padding: 30px 0;
 }
+
 .shop-header {
     margin-bottom: 20px;
 }
+
 .shop-controls {
     margin-top: 10px;
 }
+
 .sort-options {
     margin-right: 15px;
 }
+
 .product-card {
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -159,16 +141,20 @@
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     transition: all 0.3s ease;
 }
+
 .product-card:hover {
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
+
 .product-card-image img {
     width: 100%;
     height: auto;
 }
+
 .product-card-body {
     padding: 15px;
 }
+
 .product-card-title a {
     color: #333;
     text-decoration: none;
@@ -176,15 +162,87 @@
     display: block;
     margin-bottom: 10px;
 }
+
+/* Price and Stock Styling */
+.price-stock-wrapper {
+    background-color: #f8f9fa; /* Light gray background */
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
 .product-card-price {
     font-size: 1.2rem;
     color: #e74c3c;
+    margin-right: auto; /* Keep price to the left */
 }
+
+.product-card-stock {
+    font-size: 1rem;
+    margin-left: 10px; /* Space between price and stock */
+    color: #28a745; /* Green color for in-stock */
+}
+
+.product-card-stock.text-danger {
+    color: #e74c3c; /* Red color for out-of-stock */
+}
+
+.product-card-actions {
+    display: flex;
+    align-items: center;
+}
+
 .product-card-actions a {
     margin-right: 10px;
 }
-.modal-content {
-    padding: 20px;
+
+.d-flex {
+    display: flex;
+}
+
+.justify-content-between {
+    justify-content: space-between;
+}
+
+.align-items-center {
+    align-items: center;
 }
 </style>
 @endsection
+
+<script>
+   document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', function (event) {
+                event.preventDefault();
+
+                const productId = this.getAttribute('data-product-id');
+                const userId = {{ Auth::id() }}; 
+
+                fetch('{{ route('user.cart.add') }}', { 
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                    },
+                    body: JSON.stringify({
+                        user_id: userId,
+                        product_id: productId,
+                        // Default quantity
+                        quantity: 1 
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Product added to cart successfully!');
+                    } else {
+                        alert('Failed to add product to cart.');
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+            });
+        });
+    });
+</script>

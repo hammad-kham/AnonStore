@@ -9,12 +9,23 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Product extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'slug', 'description', 'price', 'category_id'];
+    protected $fillable = [
+        'name',
+     'stock',
+    'slug',
+     'description',
+      'price',
+       'category_id'];
 
     // Relationship with Category
     public function category()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class, 'category_id');
+    }
+
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItem::class);
     }
 
      // Polymorphic relationship to images

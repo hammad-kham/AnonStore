@@ -44,6 +44,10 @@
                                 <input type="number" class="form-control" id="price" name="price" value="{{ old('price', $product->price) }}" step="0.01" required>
                             </div>
                             <div class="mb-3">
+                                <label for="stock" class="form-label">Stock</label>
+                                <input type="number" class="form-control" id="stock" name="stock" value="{{ old('stock', $product->stock) }}" min="0" required>
+                            </div>
+                            <div class="mb-3">
                                 <label for="category_id" class="form-label">Category</label>
                                 <select class="form-control" id="category_id" name="category_id" required>
                                     @foreach ($categories as $category)

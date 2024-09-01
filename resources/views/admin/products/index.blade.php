@@ -15,18 +15,18 @@
         <section class="section">
             <div class="row">
                 <div class="col-lg-12">
-                    <!-- Button for creating a new product -->
-
-                    <div class="mb-3">
+                    <!-- Button for creating a new product and update stock -->
+                    <div class="d-flex justify-content-between mb-3">
                         <a href="{{ route('products.create') }}" class="btn btn-primary">Create Product</a>
+                        <a href="#" class="btn btn-primary">Update Stock</a>
                     </div>
                     <!-- Search form -->
-                <form method="GET" action="{{ route('products.index') }}" class="mb-3">
-                    <div class="input-group">
-                        <input type="text" name="search" class="form-control" placeholder="Search products..." value="{{ old('search', $search) }}">
-                        <button class="btn btn-secondary" type="submit">Search</button>
-                    </div>
-                </form>
+                    <form method="GET" action="{{ route('products.index') }}" class="mb-3">
+                        <div class="input-group">
+                            <input type="text" name="search" class="form-control" placeholder="Search products..." value="{{ old('search', $search) }}">
+                            <button class="btn btn-secondary" type="submit">Search</button>
+                        </div>
+                    </form>
                     @if (session('success'))
                         <div class="alert alert-success">
                             {{ session('success') }}
@@ -67,10 +67,11 @@
                                         <th>#</th>
                                         <th>Image</th>
                                         <th>Name</th>
-                                        <th>Slug</th>
+                                        {{-- <th>Slug</th> --}}
                                         <th>Description</th>
                                         <th>Price</th>
                                         <th>Category</th>
+                                        <th>Stock</th> <!-- New column for Stock -->
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -78,7 +79,6 @@
                                     @forelse ($products as $index => $product)
                                         <tr>
                                             <td>{{ $index + 1 }}</td>
-                                            
                                             <td>
                                                 @if ($product->images->isNotEmpty())
                                                     @foreach ($product->images as $image)
@@ -92,41 +92,33 @@
                                                          style="width: 150px; height: auto;">
                                                 @endif
                                             </td>
-                                            
-
                                             <td>{{ $product->name }}</td>
-                                            <td>{{ $product->slug }}</td>
+                                            {{-- <td>{{ $product->slug }}</td> --}}
                                             <td>{{ $product->description }}</td>
-                                            <td>{{ $product->price }}</td>
+                                            <td>${{ number_format($product->price, 2) }}</td>
                                             <td>{{ $product->category->name }}</td>
+                                            <td>{{ $product->stock }}</td> <!-- Show available stock -->
                                             <td>
-                                                <a href="{{ route('products.show', $product) }}"
-                                                    class="btn btn-info btn-sm">View</a>
-                                                <a href="{{ route('products.edit', $product) }}"
-                                                    class="btn btn-warning btn-sm">Edit</a>
-
-                                                <form action="{{ route('products.destroy', $product) }}" method="POST"
-                                                    style="display:inline;">
+                                                <a href="{{ route('products.show', $product) }}" class="btn btn-info btn-sm">View</a>
+                                                <a href="{{ route('products.edit', $product) }}" class="btn btn-warning btn-sm">Edit</a>
+                                                <form action="{{ route('products.destroy', $product) }}" method="POST" style="display:inline;">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"
-                                                        onclick="return confirm('Are you sure you want to delete this product?')">Delete</button>
+                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this product?')">Delete</button>
                                                 </form>
                                             </td>
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="8" class="text-center">No products found.</td>
+                                            <td colspan="9" class="text-center">No products found.</td>
                                         </tr>
                                     @endforelse
                                 </tbody>
                             </table>
-                            
+                        </div>
                     </div>
-
                 </div>
             </div>
         </section>
     </main>
-    <!-- End Main Content -->
 @endsection

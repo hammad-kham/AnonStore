@@ -21,6 +21,10 @@ interface ProductRepositoryInterface
     public function delete(int $id): bool;
 
     public function search($term);
+    //updaet stock
+    public function updateStock($id, $quantity);
+
+    
 
     public function findWithImages($id);
 

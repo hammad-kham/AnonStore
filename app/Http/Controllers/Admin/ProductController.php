@@ -56,6 +56,7 @@ class ProductController extends Controller
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'price' => 'required|numeric',
+            'stock' => 'required|integer',
             'category_id' => 'required|exists:categories,id',
             // Validation for images
               'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', 
@@ -103,6 +104,7 @@ class ProductController extends Controller
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'price' => 'required|numeric',
+            'stock' => 'required|integer',
             'category_id' => 'required|exists:categories,id',
             // Validation for images
             'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048', 
@@ -140,4 +142,22 @@ class ProductController extends Controller
         $this->productRepository->delete($id);
         return redirect()->route('products.index')->with('success', 'Product deleted successfully.');
     }
+
+    public function updateStock(Request $request, $id)
+    {
+        $request->validate([
+            'quantity' => 'required|integer|min:0',
+        ]);
+
+        $quantity = $request->input('quantity');
+
+        $this->productRepository->updateStock($id, $quantity);
+
+        return redirect()->back()->with('success', 'Stock updated successfully.');
+    }
+
+    
+    
+
+    
 }

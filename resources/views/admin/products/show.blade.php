@@ -18,21 +18,30 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">{{ $product->name }}</h5>
-                        <p><strong>Description:</strong> {{ $product->description }}</p>
-                        <p><strong>Price:</strong> {{ $product->price }}</p>
-                        <p><strong>Category:</strong> {{ $product->category->name }}</p>
-                        <div>
-                            <strong>Images:</strong>
-                            <div class="row">
-                                @foreach ($product->images as $image)
-                                    <div class="col-md-3 mb-2">
-                                        <img src="{{ asset('storage/' . $image->url) }}" alt="{{ $image->alt }}" class="img-fluid">
-                                    </div>
-                                @endforeach
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <h5 class="card-title">{{ $product->name }}</h5>
+                                <p><strong>Description:</strong> {{ $product->description }}</p>
+                                <p><strong>Price:</strong> ${{ number_format($product->price, 2) }}</p>
+                                <p><strong>Category:</strong> {{ $product->category->name }}</p>
+                                <p><strong>Stock:</strong> {{ $product->stock }}</p> <!-- Added stock field -->
+                            </div>
+                            <div>
+                                <strong>Images:</strong>
+                                <div class="d-flex flex-column align-items-end">
+                                    @forelse ($product->images as $image)
+                                        <div class="mb-2">
+                                            <img src="{{ asset('storage/' . $image->path) }}" alt="{{ $image->alt }}" class="img-fluid" style="max-width: 200px;">
+                                        </div>
+                                    @empty
+                                        <div class="mb-2">
+                                            <img src="{{ asset('storage/images/default-image.png') }}" alt="No Image" class="img-fluid" style="max-width: 200px;">
+                                        </div>
+                                    @endforelse
+                                </div>
                             </div>
                         </div>
-                        <a href="{{ route('products.index') }}" class="btn btn-secondary">Back to Products</a>
+                        <a href="{{ route('products.index') }}" class="btn btn-secondary mt-3">Back to Products</a>
                     </div>
                 </div>
             </div>

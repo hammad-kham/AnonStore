@@ -93,6 +93,12 @@ class ProductRepository implements ProductRepositoryInterface
     return Product::where('name', 'like', "%{$term}%")->get();
 }
     
+public function updateStock($id, $quantity)
+{
+    $product = $this->findById($id);
+    $product->stock = $quantity;
+    $product->save();
+}
 
 
     public function findWithImages($id)
