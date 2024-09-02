@@ -4,13 +4,17 @@ namespace App\Models;
 
 // use Str;
 use Illuminate\Support\Str;
+use OwenIt\Auditing\Auditable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 
-class Category extends Model
+class Category extends Model implements AuditableContract
 {
+    use Auditable;
     use SoftDeletes;
     use HasFactory;
     protected $fillable = [

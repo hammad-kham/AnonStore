@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\AdminAuthController;
+use App\Http\Controllers\Admin\AdminLogController;
 use App\Http\Controllers\Admin\AdminOrderController;
 
     //admin routes
@@ -62,3 +63,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
       Route::get('orders/search', [AdminOrderController::class, 'search'])->name('orders.search');
     Route::post('orders/{id}/update-status', [AdminOrderController::class, 'updateStatus'])->name('orders.update-status');
 });
+
+
+//log controller
+Route::get('/audits', [AdminLogController::class, 'index'])->name('admin.log.index');

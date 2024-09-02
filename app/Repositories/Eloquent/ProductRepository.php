@@ -106,4 +106,6 @@ public function updateStock($id, $quantity)
         return Product::with('images')->findOrFail($id);
     }
 
+
+
 }
