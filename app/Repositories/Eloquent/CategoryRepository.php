@@ -68,5 +68,19 @@ public function search($term)
 {
     return Category::where('name', 'like', "%{$term}%")->get();
 }
-    
+    //shows product on category............
+public function getCategoryByName(string $name)
+{
+    return Category::where('name', $name)->first();
+}
+
+public function getCategoryById(int $id)
+{
+    return Category::find($id);
+}
+
+public function getProductsByCategory(Category $category)
+{
+    return $category->products;
+}
 }

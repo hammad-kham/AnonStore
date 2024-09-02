@@ -152,8 +152,8 @@
                         </div>
                         <ul class="main-menu d-flex align-items-center">
                             <li><a class="active" href="{{ route('home') }}">Home</a></li>
-                            <li><a href="shop.html">Men</a></li>
-                            <li><a href="shop.html">Women</a></li>
+                            <li><a href="{{route('user.category.men')}}">Men</a></li>
+                            <li><a href="{{route('user.category.women')}}">Women</a></li>
                             <li><a href="{{ route('user.shop') }}">Shop</a></li>
 
 
@@ -173,8 +173,8 @@
                                    
                                     @if (isset($shopCategories) && count($shopCategories) > 0)
                                         <li class="dropdown">
-                                            <a href="javascript:void(0)" class="dropdown-toggle">Category
-                                            </a>
+                                            {{-- <a href="javascript:void(0)" class="dropdown-toggle">Category
+                                            </a> --}}
                                             <ul class="dropdown-menu">
                                                 @foreach ($shopCategories as $category)
                                                     <li class="dropdown-item px-2 py-1">

@@ -28,39 +28,39 @@ class CheckoutController extends Controller
         $this->shippingAddressRepo = $shippingAddressRepo;
     }
 
-    // public function showCheckoutPage()
-    // {
-    //     $user = Auth::user();
-
-    //     if (!$user) {
-    //         return redirect()->route('loginForm')->with('error', 'You need to log in to proceed.');
-    //     }
-        
-        
-
-    //     // Fetch user shipping addresses
-    //     $addresses = $user->shippingAddresses; 
-    //     return view('user.checkouts.checkout', compact('addresses'));
-    // }
-
     public function showCheckoutPage()
-{
-    // $user = Auth::user();
+    {
+        $user = Auth::user();
 
-    if (!$user) {
-        return redirect()->route('loginForm')->with('error', 'You need to log in to proceed.');
+        if (!$user) {
+            return redirect()->route('loginForm')->with('error', 'You need to log in to proceed.');
+        }
+        
+        
+
+        // Fetch user shipping addresses
+        $addresses = $user->shippingAddresses; 
+        return view('user.checkouts.checkout', compact('addresses'));
     }
 
-    // Fetch user shipping addresses
-    $addresses = $user->shippingAddresses;
+//     public function showCheckoutPage()
+// {
+//     // $user = Auth::user();
 
-    $emptyAddress = $user->shippingAddresses;
+//     if (!$user) {
+//         return redirect()->route('loginForm')->with('error', 'You need to log in to proceed.');
+//     }
 
-    // Fetch user cart items with product details
-    $cartItems = $user->cartItems()->with('product')->get();
+//     // Fetch user shipping addresses
+//     $addresses = $user->shippingAddresses;
 
-    return view('user.checkouts.checkout', compact('addresses', 'cartItems','emptyAddress'));
-}
+//     $emptyAddress = $user->shippingAddresses;
+
+//     // Fetch user cart items with product details
+//     $cartItems = $user->cartItems()->with('product')->get();
+
+//     return view('user.checkouts.checkout', compact('addresses', 'cartItems','emptyAddress'));
+// }
 
 
 

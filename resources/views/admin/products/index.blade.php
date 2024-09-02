@@ -97,7 +97,11 @@
                                             <td>{{ $product->description }}</td>
                                             <td>${{ number_format($product->price, 2) }}</td>
                                             <td>{{ $product->category->name }}</td>
-                                            <td>{{ $product->stock }}</td> <!-- Show available stock -->
+                                        
+                                            {{-- <td>{{ $product->stock }}</td>  --}}
+                                            <td>{{ $product->stock > 0 ? $product->stock : 'Out of Stock' }}</td>
+
+                                            <!-- Show available stock -->
                                             <td>
                                                 <a href="{{ route('products.show', $product) }}" class="btn btn-info btn-sm">View</a>
                                                 <a href="{{ route('products.edit', $product) }}" class="btn btn-warning btn-sm">Edit</a>
